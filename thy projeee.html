@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Türk Hava Yolları</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--red:#C8102E;
+--blue:#081A4B;
+--white:#fff;
+--light:#f5f7fa;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+scroll-behavior:smooth;
+}
+
+
+
+/* ÜST UYARI */
+
+.warning{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:20px;
+background:red;
+color:white;
+font-size:12px;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:99999;
+}
+#spotlight{
+
+position:fixed;
+
+width:500px;
+height:500px;
+
+background:
+radial-gradient(circle,
+rgba(255,255,255,.15),
+transparent);
+
+pointer-events:none;
+
+border-radius:50%;
+
+mix-blend-mode:screen;
+
+z-index:1;
+
+}
+
+/* NAVBAR */
+
+header{
+position:fixed;
+top:20px;
+width:100%;
+z-index:9999;
+}
+
+nav{
+width:90%;
+margin:auto;
+padding:15px 30px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+background:rgba(85, 9, 9, 0.1);
+backdrop-filter:blur(20px);
+
+border-radius:20px;
+}
+
+.logo{
+font-size:24px;
+font-weight:700;
+color:white;
+}
+
+nav ul{
+display:flex;
+gap:25px;
+list-style:none;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+}
+
+/* HERO */
+
+.hero{
+height:100vh;
+background:
+linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),
+url("https://images.unsplash.com/photo-1436491865332-7a61a109cc05");
+background-size:cover;
+background-position:center;
+
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
+}
+
+.hero-content h1{
+font-size:70px;
+margin-bottom:20px;
+}
+.hero video{
+position:absolute;
+width:100%;
+height:100%;
+object-fit:cover;
+animation:heroZoom 20s ease-in-out infinite alternate;
+}
+
+@keyframes heroZoom{
+from{
+transform:scale(1);
+}
+to{
+transform:scale(1.15);
+}
+}
+
+.hero-content p{
+font-size:22px;
+margin-bottom:25px;
+}
+.glass{
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(20px);
+border:1px solid rgba(255,255,255,.15);
+border-radius:25px;
+}
+
+.btn{
+display:inline-block;
+padding:15px 35px;
+background:var(--red);
+color:white;
+text-decoration:none;
+border-radius:50px;
+}
+.hero-plane{
+position:absolute;
+bottom:100px;
+left:-150px;
+font-size:60px;
+animation:planeFly 15s linear infinite;
+}
+
+@keyframes planeFly{
+0%{
+transform:translateX(0);
+}
+100%{
+transform:translateX(calc(100vw + 300px));
+}
+}
+.hero-content{
+animation:heroText 1.5s ease;
+}
+
+@keyframes heroText{
+
+from{
+opacity:0;
+transform:translateY(80px);
+filter:blur(15px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+filter:blur(0);
+}
+
+}
+
+/* GENEL */
+
+section{
+padding:100px 10%;
+}
+
+.title{
+text-align:center;
+font-size:45px;
+margin-bottom:50px;
+color:var(--red);
+}
+
+/* HAKKIMIZDA */
+
+.about{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:50px;
+align-items:center;
+}
+
+.about img{
+width:100%;
+border-radius:20px;
+}
+
+/* DESTINATIONS */
+
+.cards{
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+
+.card{
+
+background:
+rgba(255,255,255,.08);
+
+backdrop-filter:
+blur(20px);
+
+border:
+1px solid rgba(255,255,255,.15);
+
+box-shadow:
+0 10px 40px rgba(0,0,0,.2);
+
+}
+
+.card:hover{
+transform:
+translateY(-15px)
+rotateX(10deg)
+rotateY(-10deg);
+
+box-shadow:
+0 25px 50px rgba(0,0,0,.25);
+}
+
+.card:hover{
+transform:translateY(-10px);
+}
+
+/* ROUTE */
+
+.route{
+background:#f8f8f8;
+}
+
+.line{
+height:4px;
+background:#ddd;
+position:relative;
+margin-top:50px;
+}
+.reveal{
+opacity:0;
+transform:translateY(80px);
+transition:1s;
+}
+
+.reveal.active{
+opacity:1;
+transform:translateY(0);
+}
+#loader{
+    position:fixed;
+    inset:0;
+    background:#ffffff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:999999;
+    transition:1s;
+}
+
+.loader-content{
+    text-align:center;
+    color:#081A4B;
+}
+
+.thy-logo{
+    width:140px;
+    animation:logoIntro 2s ease-in-out infinite alternate;
+}
+
+.loader-line{
+    width:0;
+    height:4px;
+    background:#C8102E;
+    margin:25px auto;
+    border-radius:20px;
+    animation:loading 2.5s ease infinite;
+}
+
+.loader-content p{
+    letter-spacing:2px;
+    font-size:14px;
+    color:#081A4B;
+}
+
+.thy-logo{
+    width:140px;
+    filter:
+    drop-shadow(0 8px 20px rgba(200,16,46,.25));
+
+    animation:
+    pulse 2s infinite;
+}
+
+@keyframes pulse{
+
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.08);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+
+}
+
+@keyframes pulse{
+
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.08);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+
+}
+
+.plane{
+position:absolute;
+font-size:40px;
+animation:planeMove 12s linear infinite;
+}
+
+@keyframes planeMove{
+0%{
+offset-distance:0%;
+}
+100%{
+offset-distance:100%;
+}
+}
+
+.plane{
+offset-path:path("M50 250 C300 50 900 50 1150 250");
+}
+
+@keyframes fly{
+0%{left:0;}
+100%{left:95%;}
+}
+
+/* STATS */
+
+.stats{
+background:var(--red);
+color:white;
+}
+
+.stats-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+text-align:center;
+gap:20px;
+}
+
+.stats-grid h2{
+font-size:55px;
+}
+.city:hover{
+
+transform:scale(1.5);
+
+}
+
+
+/* FLEET */
+
+.fleet{
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+}
+
+.fleet-card{
+overflow:hidden;
+border-radius:20px;
+box-shadow:0 10px 20px rgba(0,0,0,.15);
+}
+.booking{
+
+margin-top:-70px;
+
+position:relative;
+z-index:100;
+
+background:white;
+padding:40px;
+
+border-radius:30px;
+
+box-shadow:
+0 20px 60px rgba(0,0,0,.15);
+
+}
+
+
+
+/* GALLERY */
+
+.gallery{
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+.gallery img{
+width:100%;
+height:250px;
+object-fit:cover;
+border-radius:15px;
+}
+
+/* CONTACT */
+
+.contact{
+background:#f5f7fa;
+}
+
+form{
+max-width:700px;
+margin:auto;
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+input,
+textarea{
+padding:15px;
+border:none;
+border-radius:10px;
+}
+
+button{
+padding:15px;
+background:var(--red);
+color:white;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+
+/* FOOTER */
+
+footer{
+background:#c60b0b;
+color:white;
+padding:40px;
+text-align:center;
+}
+
+@media(max-width:768px){
+
+.hero-content h1{
+font-size:40px;
+}
+
+.about{
+grid-template-columns:1fr;
+}
+
+.stats-grid{
+grid-template-columns:1fr 1fr;
+}
+
+nav ul{
+display:none;
+}
+
+}
+.dot{
+
+width:14px;
+height:14px;
+
+background:#C8102E;
+
+border-radius:50%;
+
+position:absolute;
+
+animation:pulse 2s infinite;
+
+}
+
+@keyframes pulse{
+
+0%{
+transform:scale(1);
+}
+
+100%{
+transform:scale(3);
+opacity:0;
+}
+
+}
+body{
+transition:.4s;
+}
+
+.dark{
+background:#0f172a;
+color:white;
+}
+.flight-search{
+    position:relative;
+    padding:120px 8%;
+    overflow:hidden;
+    background:
+    linear-gradient(
+    135deg,
+    #ffffff 0%,
+    #ffffff 25%,
+    #ffffff 60%,
+    #ffffff 100%);
+}
+
+.flight-search::before{
+    content:"";
+    position:absolute;
+    width:700px;
+    height:700px;
+    border-radius:50%;
+    background:
+    rgba(255,255,255,.08);
+    top:-250px;
+    right:-150px;
+    filter:blur(120px);
+}
+
+.flight-search::after{
+    content:"";
+    position:absolute;
+    width:500px;
+    height:500px;
+    border-radius:50%;
+    background:
+    rgba(255,255,255,.05);
+    bottom:-150px;
+    left:-150px;
+    filter:blur(100px);
+}
+
+.search-container{
+    position:relative;
+    z-index:2;
+    max-width:1400px;
+    margin:auto;
+}
+
+.search-title{
+    text-align:center;
+    color:white;
+    margin-bottom:50px;
+}
+
+.search-title span{
+    letter-spacing:3px;
+    font-size:14px;
+    opacity:.9;
+}
+
+.search-title h2{
+    font-size:48px;
+    margin:15px 0;
+    font-weight:800;
+}
+
+.search-title p{
+    opacity:.9;
+}
+
+.search-card{
+
+    background:
+    rgba(255,255,255,.96);
+
+    backdrop-filter:
+    blur(25px);
+
+    border-radius:30px;
+
+    padding:40px;
+
+    box-shadow:
+    0 30px 80px rgba(0,0,0,.25);
+
+}
+
+.trip-type{
+    display:flex;
+    gap:10px;
+    margin-bottom:30px;
+}
+
+.trip-type button{
+
+    border:none;
+
+    padding:12px 22px;
+
+    border-radius:50px;
+
+    background:#f3f4f6;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.trip-type .active{
+
+    background:#C8102E;
+    color:white;
+
+}
+
+.search-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(180px,1fr));
+
+    gap:20px;
+
+    align-items:end;
+
+}
+
+.field{
+    display:flex;
+    flex-direction:column;
+}
+
+.field label{
+    margin-bottom:8px;
+    color:#ff0000;
+    font-weight:600;
+}
+
+.field input,
+.field select{
+
+    padding:16px;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:15px;
+
+    font-size:15px;
+
+}
+
+.field input:focus,
+.field select:focus{
+
+    outline:none;
+
+    border-color:#C8102E;
+
+}
+
+.swap{
+
+    width:60px;
+    height:60px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#c51313;
+
+    color:white;
+
+    font-size:22px;
+
+    cursor:pointer;
+
+    transition:.4s;
+
+}
+
+.swap:hover{
+    transform:rotate(180deg);
+}
+
+.search-btn{
+
+    margin-top:30px;
+
+    width:100%;
+
+    border:none;
+
+    padding:18px;
+
+    border-radius:18px;
+
+    background:
+    linear-gradient(
+    135deg,
+    #C8102E,
+    #E63946);
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.4s;
+
+}
+
+.search-btn:hover{
+
+    transform:
+    translateY(-4px);
+
+    box-shadow:
+    0 15px 30px rgba(200,16,46,.35);
+
+}
+.flight-network{
+
+    padding:120px 8%;
+
+    background:
+    linear-gradient(
+    135deg,
+    #ffffff,
+    #ffffff);
+
+    color:white;
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.flight-network::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:700px;
+    height:700px;
+
+    background:
+    rgba(200,16,46,.08);
+
+    border-radius:50%;
+
+    top:-300px;
+    right:-200px;
+
+    filter:blur(120px);
+
+}
+
+.network-header{
+
+    text-align:center;
+    margin-bottom:60px;
+    color: #C8102E;
+
+}
+
+.network-header span{
+
+    color:#C8102E;
+    letter-spacing:3px;
+
+}
+
+.network-header h2{
+
+    font-size:52px;
+    margin:15px 0;
+    color: #C8102E;
+
+}
+
+.route-container{
+
+    position:relative;
+
+    max-width:1200px;
+
+    margin:auto;
+    color: #C8102E;
+
+}
+
+#plane{
+
+    filter:
+    drop-shadow(
+    0 0 15px rgba(200,16,46,.8));
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="warning">
+Bu site Web Tasarım dersi kapsamında yapılmıştır ve sitedeki bilgilerin geçerliliği yoktur.
+</div>
+
+<header>
+<nav>
+<div class="logo">TÜRK HAVA YOLLARI</div>
+
+<ul>
+<li><a href="#home">Ana Sayfa</a></li>
+<li><a href="#about">Hakkımızda</a></li>
+<li><a href="#destinations">Destinasyonlar</a></li>
+<li><a href="#fleet">Filo</a></li>
+<li><a href="#contact">İletişim</a></li>
+</ul>
+</nav>
+</header>
+
+<!-- HERO -->
+
+<section id="home" class="hero">
+
+<div class="hero-content">
+
+<h1>Dünyanın En Çok Ülkesine Uçan Havayolu</h1>
+
+<p>
+Konfor, güven ve ayrıcalıklı seyahat deneyimi
+</p>
+
+<a href="#about" class="btn">
+Keşfet
+</a>
+
+</div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section id="about">
+
+<h2 class="title">Hakkımızda</h2>
+
+<div class="about">
+
+<img src="https://images.unsplash.com/photo-1517479149777-5f3b1511d5ad">
+
+<div>
+
+<h3>1933'ten Bugüne</h3>
+
+<br>
+
+<p>
+Türk Hava Yolları dünyanın en geniş uçuş ağlarından
+birine sahip olup milyonlarca yolcuya hizmet vermektedir.
+</p>
+
+</div>
+
+
+
+
+</section>
+
+</section>
+<section class="flight-network">
+
+    <div class="network-header">
+        <span>GLOBAL NETWORK</span>
+        <h2>Dünyaya Açılan Kanatlar</h2>
+        <p>İstanbul'dan 130'dan fazla ülkeye uçuş.</p>
+    </div>
+
+    <div class="route-container">
+
+        <svg viewBox="0 0 1200 400">
+
+            <defs>
+
+                <linearGradient id="thyGradient">
+
+                    <stop offset="0%" stop-color="#C8102E"/>
+
+                    <stop offset="100%" stop-color="#E63946"/>
+
+                </linearGradient>
+
+            </defs>
+
+            <path
+            id="flightPath"
+            d="M100 300 C350 50 850 50 1100 250"
+            fill="none"
+            stroke="url(#thyGradient)"
+            stroke-width="5"
+            stroke-linecap="round"/>
+
+            <circle cx="100" cy="300" r="10" fill="#C8102E"/>
+            <circle cx="1100" cy="250" r="10" fill="#C8102E"/>
+
+            <g id="plane">
+
+                <circle
+                r="28"
+                fill="rgba(200,16,46,.15)"/>
+
+                <text
+                x="-15"
+                y="12"
+                font-size="30">
+                ✈
+                </text>
+
+            </g>
+
+        </svg>
+
+    </div>
+
+</section>
+
+</div>
+
+<!-- DESTINATIONS -->
+
+<section id="destinations">
+
+<h2 class="title">
+Popüler Destinasyonlar
+</h2>
+<div class="city left">İstanbul</div>
+<div class="city right">Paris</div>
+
+<div class="cards">
+
+<div class="card">
+<h3>Paris</h3>
+<p>Romantizmin başkenti.</p>
+</div>
+
+<div class="card">
+<h3>Tokyo</h3>
+<p>Teknoloji ve kültür.</p>
+</div>
+
+<div class="card">
+<h3>New York</h3>
+<p>Dünyanın merkezi.</p>
+</div>
+
+<div class="card">
+<h3>Dubai</h3>
+<p>Lüks ve modern yaşam.</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- ROUTE -->
+
+
+
+<!-- STATS -->
+
+<section class="stats">
+
+<h2 class="title" style="color:white">
+İstatistikler
+</h2>
+
+<div class="stats-grid">
+
+<div>
+<h2>130+</h2>
+<p>Ülke</p>
+</div>
+
+<div>
+<h2>350+</h2>
+<p>Destinasyon</p>
+</div>
+
+<div>
+<h2>480+</h2>
+<p>Uçak</p>
+</div>
+
+<div>
+<h2>85M+</h2>
+<p>Yolcu</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- FLEET -->
+
+
+<div id="loader">
+
+    <div class="loader-content">
+
+        <img src="indir.png" alt="THY Logo" class="thy-logo">
+
+        <div class="loader-line"></div>
+
+        <p>Dünyayı Birlikte Keşfedelim</p>
+
+    </div>
+
+</div>
+
+<!-- GALLERY -->
+
+<section>
+
+<h2 class="title">
+Galeri
+</h2>
+
+<div class="gallery">
+
+<img src="https://st4.depositphotos.com/2602391/30960/i/450/depositphotos_309608828-stock-photo-istanbul-turkey-2019-teknofest-istanbul.jpg">
+<img src="https://st4.depositphotos.com/9915274/25690/i/450/depositphotos_256906646-stock-photo-moscow-russia-march-26-2019.jpg">
+<img src="https://media.istockphoto.com/id/1055059084/tr/foto%C4%9Fraf/thy-t%C3%BCrk-hava-yollar%C4%B1-u%C3%A7ak-kanad%C4%B1-bulutlar%C4%B1n-%C3%BCzerinde.jpg?s=612x612&w=0&k=20&c=je8gCH2x055U2y_m3t5_7bE_jYwqiQYI3Vs-gW_VHQk=">
+<img src="https://i.ytimg.com/vi/hqurlpO9uyc/maxresdefault.jpg">
+
+</div>
+<section class="flight-search">
+
+    <div class="search-bg"></div>
+
+    <div class="search-container">
+
+        <div class="search-title">
+            <span>✈ TÜRK HAVA YOLLARI</span>
+            <h2>Bir Sonraki Yolculuğunuzu Planlayın</h2>
+            <p>130'dan fazla ülkeye konforlu ve güvenli uçuş deneyimi.</p>
+        </div>
+
+        <div class="search-card">
+
+            <div class="trip-type">
+                <button class="active">Gidiş - Dönüş</button>
+                <button>Tek Yön</button>
+                <button>Çoklu Uçuş</button>
+            </div>
+
+            <div class="search-grid">
+
+                <div class="field">
+                    <label>Nereden</label>
+                    <input type="text" placeholder="İstanbul">
+                </div>
+
+                <button class="swap">
+                    ⇄
+                </button>
+
+                <div class="field">
+                    <label>Nereye</label>
+                    <input type="text" placeholder="Paris">
+                </div>
+
+                <div class="field">
+                    <label>Gidiş Tarihi</label>
+                    <input type="date">
+                </div>
+
+                <div class="field">
+                    <label>Dönüş Tarihi</label>
+                    <input type="date">
+                </div>
+
+                <div class="field">
+                    <label>Yolcu</label>
+                    <select>
+                        <option>1 Yolcu</option>
+                        <option>2 Yolcu</option>
+                        <option>3 Yolcu</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <button class="search-btn">
+                ✈ Uçuş Ara
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section id="contact" class="contact">
+
+<h2 class="title">
+İletişim
+</h2>
+
+<form>
+
+<input type="text" placeholder="Ad Soyad">
+
+<input type="email" placeholder="E-Posta">
+
+<textarea rows="6"
+placeholder="Mesajınız"></textarea>
+
+<button>
+Gönder
+</button>
+
+
+</form>
+
+</section>
+
+<footer>
+
+<h3>Türk Hava Yolları</h3>
+
+<p>
+© 2026 Tüm Hakları Saklıdır
+</p>
+<script>
+    window.addEventListener("load",()=>{
+
+    setTimeout(()=>{
+
+        document.getElementById("loader").style.opacity="0";
+
+        setTimeout(()=>{
+
+            document.getElementById("loader").style.display="none";
+
+        },1000);
+
+    },2500);
+
+});
+
+</script>
+<script>
+    const path =
+document.getElementById("flightPath");
+
+const plane =
+document.getElementById("plane");
+
+const length =
+path.getTotalLength();
+
+let progress = 0;
+
+function animatePlane(){
+
+    progress += 2;
+
+    if(progress > length){
+
+        progress = 0;
+
+    }
+
+    const p1 =
+    path.getPointAtLength(progress);
+
+    const p2 =
+    path.getPointAtLength(progress + 1);
+
+    const angle =
+    Math.atan2(
+    p2.y - p1.y,
+    p2.x - p1.x
+    ) * 180 / Math.PI;
+
+    plane.setAttribute(
+    "transform",
+    `translate(${p1.x},${p1.y})
+    rotate(${angle})`
+    );
+
+    requestAnimationFrame(
+    animatePlane
+    );
+
+}
+
+animatePlane();
+</script>
+
+
+</footer>
+
+
